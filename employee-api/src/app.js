@@ -20,7 +20,6 @@ app.use(cors())
 // eslint-disable-next-line no-undef
 const PORT = process.env.PORT || 3000
 
-// app.use(index)
 app.use('/api/', index)
     
 
