@@ -4,14 +4,29 @@
   "description": "Aplicação CRUD com API em Node.js para alimentação de Vue, React e Angular",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon",
+    "lint": "eslint --ext .js -f ./node_modules/eslint-friendly-formatter . --fix",
+    "prepush": "npm run lint",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/janamachado/employee-crud-api"
   },
-  "keywords": [],
-  "author": "Jana Machado",
+  "keywords": [
+    "nodejs",
+    "api",
+    "crud",
+    "azure-function",
+    "express",
+    "github-actions",
+    "swa",
+    "serverless",
+    "postgresql",
+    "sql",
+    "javascript"
+  ],
+  "author": "Jana Machado </janammachado - LinkedIn",
   "license": "ISC",
   "devDependencies": {
     "eslint": "^8.38.0",
@@ -21,7 +36,6 @@
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
-    "eslint-friendly-formatter": "^4.0.1",
     "express": "^4.18.2",
     "express-promise-router": "^4.1.1",
     "pg": "^8.10.0"
