@@ -4,10 +4,9 @@
   "description": "Aplicação CRUD com API em Node.js para alimentação de Vue, React e Angular",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon",
+    "dev": "nodemon src/app.js",
     "lint": "eslint --ext .js -f ./node_modules/eslint-friendly-formatter . --fix",
-    "prepush": "npm run lint",
-    "start": "node server.js"
+    "prepush": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -29,9 +28,11 @@
   "author": "Jana Machado </janammachado - LinkedIn",
   "license": "ISC",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.21.2",
     "eslint": "^8.38.0",
     "husky": "^8.0.3",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "sucrase": "^3.32.0"
   },
   "dependencies": {
     "cors": "^2.8.5",
