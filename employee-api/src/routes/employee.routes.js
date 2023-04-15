@@ -1,5 +1,15 @@
+/**
+ * Arquivo responsável pelo roteamento da API
+ * data: 14/04/23
+ * autora: Jana Machado - https://www.linkedin.com/in/janammachado/
+ */
 
-import { Router } from "express"
+import { Router } from "express";
+import {createEmployeeController} from "../controllers/employee.controller"
 
-export const index = Router()
+const employeeRoutes = Router()
 
+/* Definindo rotas CRUD para tabela employee */
+employeeRoutes.post('', createEmployeeController)
+
+export default employeeRoutes

@@ -9,8 +9,7 @@ import * as dotenv from 'dotenv'
 import cors from 'cors'
 import express from "express";
 import index from './routes/index'
-import { employeeRoutes } from './routes/employee.routes';
-// import employeeRoutes from './routes/employee.routes'
+import employeeRoutes from './routes/employee.routes';
 
 dotenv.config()
 
@@ -22,7 +21,7 @@ app.use(cors())
 const PORT = process.env.PORT || 3000
 
 app.use('/api/', index)
-app.use('/employee', employeeRoutes)
+app.use('/employees', employeeRoutes)
 
 app.listen(PORT, () => {
     console.log(`server is running at port: ${PORT}`)
