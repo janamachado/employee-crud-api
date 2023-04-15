@@ -1,17 +1,18 @@
 /* eslint-disable no-unused-vars */
 /**
- * Arquivo responsável pela lógica de execução do CRUD de um Employee
+ * Arquivo responsável por receber dados, enviar para o service e retornar os dados manipulados.
  * data: 14/04/23
  * autora: Jana Machado - https://www.linkedin.com/in/janammachado/
  */
 
-import { createEmployeeService } from '../services/employee.service'
+import { createEmployeeService, listEmployeesService } from '../services/employee.service'
 
+/* Rota Post para criação de um employee */
 const createEmployeeController = async (req, res) =>{
   const { name, job_role, salary, birth, employee_registration } = req.body
   try {
     const createdEmployee = await createEmployeeService(name, job_role, salary, birth, employee_registration)
-    return res.status(200).json({
+    return res.status(201).json({
       message: "Employee created succesfully",
       employee: createdEmployee
     })
@@ -22,4 +23,19 @@ const createEmployeeController = async (req, res) =>{
   }
 }
 
-export {createEmployeeController}
+/* Rota Get para listagem de todos os employees */
+const listEmployeesController = async (req, res) =>{
+  try {
+    const allEmployees = await listEmployeesService()
+    return res.status(200).json({
+      message: "All employees:",
+      employees: allEmployees
+    })
+  } catch (error) {
+    return res.status(404).json({
+      message: error.message
+    })
+  }
+}
+
+export {createEmployeeController, listEmployeesController}

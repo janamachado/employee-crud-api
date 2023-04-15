@@ -5,11 +5,12 @@
  */
 
 import { Router } from "express";
-import {createEmployeeController} from "../controllers/employee.controller"
+import {createEmployeeController, listEmployeesController} from "../controllers/employee.controller"
 
 const employeeRoutes = Router()
 
 /* Definindo rotas CRUD para tabela employee */
 employeeRoutes.post('', createEmployeeController)
+employeeRoutes.get('', listEmployeesController)
 
 export default employeeRoutes
