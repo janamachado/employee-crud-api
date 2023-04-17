@@ -78,9 +78,7 @@ const deleteEmployeeController = async (req, res) =>{
   const {id} = req.params
   try {
     await deleteEmployeeService(id)
-    return res.status(204).json({
-      message: "Employee deleted succesfully"
-    })
+    return res.status(204)
   } catch (error) {
     return res.status(404).json({
       message: "Ocorreu algum erro",
@@ -88,4 +86,5 @@ const deleteEmployeeController = async (req, res) =>{
     })
   }
 }
+
 export {createEmployeeController, listEmployeesController, listOneEmployeeController, updateEmployeeController, deleteEmployeeController}
