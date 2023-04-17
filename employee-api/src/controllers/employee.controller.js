@@ -5,7 +5,7 @@
  * autora: Jana Machado - https://www.linkedin.com/in/janammachado/
  */
 
-import { createEmployeeService, listEmployeesService } from '../services/employee.service'
+import { createEmployeeService, listEmployeesService, listOneEmployeeService } from '../services/employee.service'
 
 /* Rota Post para criação de um employee */
 const createEmployeeController = async (req, res) =>{
@@ -38,4 +38,18 @@ const listEmployeesController = async (req, res) =>{
   }
 }
 
-export {createEmployeeController, listEmployeesController}
+/* Rota Get para listagem de apenas um employee */
+const listOneEmployeeController = async (req, res) =>{
+  const {id} = req.params
+  try {
+    const employee = await listOneEmployeeService(id)
+    return res.status(200).json({employee: employee})
+
+  } catch (error) {
+    return res.status(404).json({
+      message: error.message
+    })
+  }
+}
+
+export {createEmployeeController, listEmployeesController, listOneEmployeeController}

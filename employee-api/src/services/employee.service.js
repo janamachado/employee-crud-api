@@ -1,5 +1,5 @@
 /**
- * Arquivo responsável pela lógica manipulação dos dados recebidos e enviar para os controllers.
+ * Arquivo responsável conectar com o Banco de Dados, fazer a manipulação dos dados recebidos e retornar para os controllers.
  * data: 15/04/23
  * autora: Jana Machado - https://www.linkedin.com/in/janammachado/
  */
@@ -23,7 +23,7 @@ const createEmployeeService = async (name, job_role, salary, birth, employee_reg
   }
 }
 
-/* Rota Get para listagem de todos os employees */
+/* Rota Get para listagem de TODOS os employees */
 const listEmployeesService = async () =>{
   try {
     const allEmployees = await db.query(
@@ -37,4 +37,18 @@ const listEmployeesService = async () =>{
   }
 }
 
-export {createEmployeeService, listEmployeesService}
+/* Rota Get para listagem de apenas UM employee */
+const listOneEmployeeService = async (id) =>{
+  try {
+    const employee = await db.query(
+      `
+      SELECT * FROM employee WHERE employee_id = $1
+      `, [id]
+      )
+      return employee.rows[0]
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export {createEmployeeService, listEmployeesService, listOneEmployeeService}
