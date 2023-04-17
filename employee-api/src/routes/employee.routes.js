@@ -5,7 +5,7 @@
  */
 
 import { Router } from "express";
-import {createEmployeeController, listEmployeesController, listOneEmployeeController, updateEmployeeController} from "../controllers/employee.controller"
+import {createEmployeeController, deleteEmployeeController, listEmployeesController, listOneEmployeeController, updateEmployeeController} from "../controllers/employee.controller"
 
 const employeeRoutes = Router()
 
@@ -14,5 +14,6 @@ employeeRoutes.post('', createEmployeeController)
 employeeRoutes.get('', listEmployeesController)
 employeeRoutes.get('/:id', listOneEmployeeController)
 employeeRoutes.patch('/:id', updateEmployeeController)
+employeeRoutes.delete('/:id', deleteEmployeeController)
 
 export default employeeRoutes

@@ -56,14 +56,15 @@ const updateEmployeeService = async (id, name, job_role, salary, birth, employee
   try {
     const updatedEmployee = await db.query(
       `
-      UPDATE employee SET
-      name = $1,
-      job_role = $2,
-      salary = $3,
-      birth = $4,
-      employee_registration = $5
-      WHERE employee_id = $6
-      RETURNING *
+        UPDATE employee SET
+          name = $1,
+          job_role = $2,
+          salary = $3,
+          birth = $4,
+          employee_registration = $5
+        WHERE
+          employee_id = $6
+        RETURNING *
       `,
       [name, job_role, salary, birth, employee_registration, id]
     )
@@ -73,4 +74,21 @@ const updateEmployeeService = async (id, name, job_role, salary, birth, employee
   }
 }
 
-export {createEmployeeService, listEmployeesService, listOneEmployeeService, updateEmployeeService}
+/* Rota DELETE para deletar um employee do Banco de Dados. */
+const deleteEmployeeService = async (id) =>{
+  try {
+    await db.query(
+    `
+      DELETE FROM 
+        employee
+      WHERE
+        employee_id = $1
+    `,
+    [id]
+    )
+  } catch (error) {
+    throw new Error
+  }
+}
+
+export {createEmployeeService, listEmployeesService, listOneEmployeeService, updateEmployeeService, deleteEmployeeService}

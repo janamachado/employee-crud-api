@@ -73,4 +73,19 @@ const updateEmployeeController = async (req, res) =>{
   }
 }
 
-export {createEmployeeController, listEmployeesController, listOneEmployeeController, updateEmployeeController}
+/* Rota DELETE para deletar um employee do Banco de Dados. */
+const deleteEmployeeController = async (req, res) =>{
+  const {id} = req.params
+  try {
+    await deleteEmployeeService(id)
+    return res.status(204).json({
+      message: "Employee deleted succesfully"
+    })
+  } catch (error) {
+    return res.status(404).json({
+      message: "Ocorreu algum erro",
+      erro: error
+    })
+  }
+}
+export {createEmployeeController, listEmployeesController, listOneEmployeeController, updateEmployeeController, deleteEmployeeController}
