@@ -5,9 +5,10 @@
  */
 
 import db from '../config/database'
+import { IEmployee } from '../interfaces/employee.interfaces'
 
 /* Rota Post para criação de um employee */
-const createEmployeeService = async (name, job_role, salary, birth, employee_registration) =>{
+const createEmployeeService = async ({name, job_role, salary, birth, employee_registration}: IEmployee): Promise<IEmployee> =>{
   try {
     const createEmployee = await db.query(
       `
@@ -21,13 +22,13 @@ const createEmployeeService = async (name, job_role, salary, birth, employee_reg
       [name, job_role, salary, birth, employee_registration]
     )
     return createEmployee.rows[0]
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error)
   }
 }
 
 /* Rota Get para listagem de TODOS os employees */
-const listEmployeesService = async () =>{
+const listEmployeesService = async (): Promise<Array<IEmployee>> =>{
   try {
     const allEmployees = await db.query(
       `
@@ -38,13 +39,13 @@ const listEmployeesService = async () =>{
       `
     )
     return allEmployees.rows
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error)
   }
 }
 
 /* Rota Get para listagem de apenas UM employee */
-const listOneEmployeeService = async (id) =>{
+const listOneEmployeeService = async (id: string): Promise<IEmployee> =>{
   try {
     const employee = await db.query(
       `
@@ -55,13 +56,13 @@ const listOneEmployeeService = async (id) =>{
       `, [id]
       )
       return employee.rows[0]
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error)
   }
 }
 
 /* Rota PATCH para atualizar um ou mais dados de um employee */
-const updateEmployeeService = async (id, name, job_role, salary, birth, employee_registration) =>{
+const updateEmployeeService = async (id: string, { name, job_role, salary, birth, employee_registration }: IEmployee): Promise<IEmployee> =>{
   try {
     const updatedEmployee = await db.query(
       `
@@ -78,13 +79,13 @@ const updateEmployeeService = async (id, name, job_role, salary, birth, employee
       [name, job_role, salary, birth, employee_registration, id]
     )
     return updatedEmployee.rows[0]
-  } catch (error) {
+  } catch (error: any) {
     throw new Error(error)
   }
 }
 
 /* Rota DELETE para deletar um employee do Banco de Dados. */
-const deleteEmployeeService = async (id) =>{
+const deleteEmployeeService = async (id: string): Promise<void> =>{
   try {
     await db.query(
     `
@@ -95,7 +96,7 @@ const deleteEmployeeService = async (id) =>{
     `,
     [id]
     )
-  } catch (error) {
+  } catch (error: any) {
     throw new Error
   }
 }
