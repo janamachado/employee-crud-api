@@ -5,7 +5,7 @@
  * autora: Jana Machado - https://www.linkedin.com/in/janammachado/
  */
 
-import { createEmployeeService, listEmployeesService, listOneEmployeeService } from '../services/employee.service'
+import { createEmployeeService, deleteEmployeeService, listEmployeesService, listOneEmployeeService, updateEmployeeService } from '../services/employee.service'
 
 /* Rota Post para criação de um employee */
 const createEmployeeController = async (req, res) =>{
@@ -18,7 +18,8 @@ const createEmployeeController = async (req, res) =>{
     })
   } catch (error) {
     return res.status(400).json({
-      message: error.message
+      message: "Ocorreu algum erro ao enviar a requisição",
+      erro: error
     })
   }
 }
@@ -33,7 +34,8 @@ const listEmployeesController = async (req, res) =>{
     })
   } catch (error) {
     return res.status(404).json({
-      message: error.message
+      message: "Ocorreu algum erro ao enviar a requisição",
+      erro: error
     })
   }
 }
@@ -47,9 +49,28 @@ const listOneEmployeeController = async (req, res) =>{
 
   } catch (error) {
     return res.status(404).json({
-      message: error.message
+      message: "Ocorreu algum erro ao enviar a requisição",
+      erro: error
     })
   }
 }
 
-export {createEmployeeController, listEmployeesController, listOneEmployeeController}
+/* Rota PUT para atualizar os dados de um employee */
+const updateEmployeeController = async (req, res) =>{
+  const {id} = req.params
+  try {
+    const { name, job_role, salary, birth, employee_registration } = req.body
+    const updatedEmployee = await updateEmployeeService(id, name, job_role, salary, birth, employee_registration)
+    return res.status(200).json({
+      message: "Employee updated succesfully",
+      employee_updated: updatedEmployee
+    })
+  } catch (error) {
+    return res.status(404).json({
+      message: "Ocorreu algum erro ao enviar a requisição",
+      erro: error
+    })
+  }
+}
+
+export {createEmployeeController, listEmployeesController, listOneEmployeeController, updateEmployeeController}

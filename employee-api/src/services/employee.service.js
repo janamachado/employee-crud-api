@@ -51,4 +51,26 @@ const listOneEmployeeService = async (id) =>{
   }
 }
 
-export {createEmployeeService, listEmployeesService, listOneEmployeeService}
+/* Rota PATCH para atualizar um ou mais dados de um employee */
+const updateEmployeeService = async (id, name, job_role, salary, birth, employee_registration) =>{
+  try {
+    const updatedEmployee = await db.query(
+      `
+      UPDATE employee SET
+      name = $1,
+      job_role = $2,
+      salary = $3,
+      birth = $4,
+      employee_registration = $5
+      WHERE employee_id = $6
+      RETURNING *
+      `,
+      [name, job_role, salary, birth, employee_registration, id]
+    )
+    return updatedEmployee.rows[0]
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export {createEmployeeService, listEmployeesService, listOneEmployeeService, updateEmployeeService}

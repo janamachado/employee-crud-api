@@ -5,7 +5,7 @@
  */
 
 import { Router } from "express";
-import {createEmployeeController, listEmployeesController, listOneEmployeeController} from "../controllers/employee.controller"
+import {createEmployeeController, listEmployeesController, listOneEmployeeController, updateEmployeeController} from "../controllers/employee.controller"
 
 const employeeRoutes = Router()
 
@@ -13,5 +13,6 @@ const employeeRoutes = Router()
 employeeRoutes.post('', createEmployeeController)
 employeeRoutes.get('', listEmployeesController)
 employeeRoutes.get('/:id', listOneEmployeeController)
+employeeRoutes.patch('/:id', updateEmployeeController)
 
 export default employeeRoutes
